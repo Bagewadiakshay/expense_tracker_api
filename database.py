@@ -2,7 +2,7 @@ import sqlite3
 
 
 def get_connection():
-    con= sqlite3.connect("expenses.db")
+    con = sqlite3.connect("expenses.db")
     return con
 
 def create_table():
@@ -10,7 +10,8 @@ def create_table():
     cursor=con.cursor()
 
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS expense(
+    CREATE TABLE IF NOT EXISTS expense
+    (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     amount REAL NOT NULL,
