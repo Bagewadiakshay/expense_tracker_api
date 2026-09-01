@@ -1,5 +1,5 @@
 from flask import Flask 
-
+from flask import render_template
 from flask import jsonify 
 from flask import request
 
@@ -11,6 +11,18 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return jsonify({"msg":"Expense tracker API is running.."})
+
+@app.route("/dashboard")
+def dashboard():
+    expenses = get_allexp()
+    total = sum(row[2] for row in expenses)
+    budget = 5000
+    warning = total > budget
+    return render_template("index.html", 
+                         expenses=expenses,
+                         total=total,
+                         budget=budget,
+                         warning=warning)
 
 @app.route("/expenses",methods=["POST"])
 def create_exp():
